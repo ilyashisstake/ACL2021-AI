@@ -11,3 +11,5 @@ Le labyrinthe possède des cases spéciales :
 	4) Malus : si le héros arrive sur la case, le temps restant est diminué
 	5) Bonus : si le héros arrive sur la case, il obtient un bonus de temps supplémentaire 
 	6) Portail : si le héros arrive sur la case, il est téléporté sur une autre case
+
+planning: 
