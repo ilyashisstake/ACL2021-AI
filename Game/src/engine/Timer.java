@@ -8,7 +8,7 @@ public class Timer {
 	}
 	
 	public double getTime() {
-		return this.time_left;
+		return Math.round(this.time_left*100.0)/100.0;
 	}
 	
 	public void decremente(double temps) {
