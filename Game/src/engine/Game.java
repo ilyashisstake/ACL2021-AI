@@ -11,6 +11,9 @@ public interface Game {
 	public static Heros heros = new Heros(20,20);
 	
 	Case cases =new Case();
+	
+	Timer timer=new Timer(20);
+	
 	/**
 	 * methode qui contient l'evolution du jeu en fonction de la commande
 	 * 

@@ -99,6 +99,7 @@ public class PacmanGame implements Game {
 	@Override
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
+		System.out.println(this.timer.getTime());
 		switch (commande) {
 		// si on appuie sur 'q',commande joueur est gauche
 		case RIGHT:
@@ -120,6 +121,7 @@ public class PacmanGame implements Game {
 		
 		}
 		teleportation();
+		this.timer.decremente(0.1);
 	}
 
 	/**
@@ -130,6 +132,9 @@ public class PacmanGame implements Game {
 		int x=this.heros.getX();
 		int y=this.heros.getY();
 		if (contient(this.cases.getSortie(),x,y)) {
+			return true;
+		}
+		if (this.timer.getTime()<=0) {
 			return true;
 		}
 		return false;
