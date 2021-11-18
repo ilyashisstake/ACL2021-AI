@@ -56,6 +56,9 @@ public class PacmanPainter implements GamePainter {
 		crayon.setColor(Color.blue);
 		crayon.fillOval(PacmanGame.heros.getX(),PacmanGame.heros.getY(),20,20);
 		
+		crayon.setColor(Color.white);
+		crayon.drawString(PacmanGame.timer.toString(), WIDTH/2 - 5, 15);
+		
 	}
 
 	@Override

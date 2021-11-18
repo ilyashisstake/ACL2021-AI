@@ -18,4 +18,7 @@ public class Timer {
 	public void incremente(double temps) {
 		this.time_left = this.time_left + temps;
 	}
+	public String toString() {
+		return Double.toString(Math.round(this.time_left*100.0)/100.0);
+	}
 }
