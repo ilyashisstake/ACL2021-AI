@@ -14,7 +14,7 @@ public class Case {
 	
 	private int [][] sortie; 
 	
-	Case(){
+	public Case(){
 		
 		List<List<Integer>> liste= new ArrayList<List<Integer>>();
 		for (int k = 160;k<180;k=k+20) {

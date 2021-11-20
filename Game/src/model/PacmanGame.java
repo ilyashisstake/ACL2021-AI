@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import engine.Case;
 import engine.Cmd;
 import engine.Game;
+import engine.Heros;
+import engine.Timer;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -20,6 +23,13 @@ public class PacmanGame implements Game {
 	 * constructeur avec fichier source pour le help
 	 * 
 	 */
+	
+    public static Heros heros = new Heros(20,20);
+	
+	public static Case cases =new Case();
+	
+	public static Timer timer=new Timer(20);
+	
 	public PacmanGame(String source) {
 		BufferedReader helpReader;
 		try {

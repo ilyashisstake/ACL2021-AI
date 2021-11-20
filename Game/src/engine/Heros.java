@@ -9,7 +9,7 @@ public class Heros {
 		this.Y=0;
 	}
 	
-	Heros(int X, int Y){
+	public Heros(int X, int Y){
 		this.X=X;
 		this.Y=Y;
 	}
