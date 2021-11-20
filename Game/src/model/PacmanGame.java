@@ -91,36 +91,59 @@ public class PacmanGame implements Game {
     public void teleportation() {
     	int x=this.heros.getX();
 		int y=this.heros.getY();
+		System.out.println(x);
+		System.out.println(y);
     	if (contient(this.cases.getPortail(),x,y)){
     		this.heros.setX(20);
     		this.heros.setY(20);
     	}
     }
+    
+    public void bonus() {
+    	int x=this.heros.getX();
+		int y=this.heros.getY();
+    	if (contient(this.cases.getBonus(),x,y)){
+    		this.timer.incremente(10);
+    		PacmanGame.cases.removeBonus(x,y);
+    	}
+    }
+    public void malus() {
+    	int x=this.heros.getX();
+		int y=this.heros.getY();
+    	if (contient(this.cases.getMalus(),x,y)){
+    		this.timer.decremente(10);
+    		PacmanGame.cases.removeMalus(x,y);
+    	}
+    }
+    
 	@Override
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
 		System.out.println(this.timer.getTime());
+		int deplacement=20;
 		switch (commande) {
 		// si on appuie sur 'q',commande joueur est gauche
 		case RIGHT:
 			if (check(commande)) {
-			this.heros.setX(this.heros.getX()+20);}
+			this.heros.setX(this.heros.getX()+deplacement);}
 			break;
 		case DOWN:
 			if (check(commande)) {
-			this.heros.setY(this.heros.getY()+20);}
+			this.heros.setY(this.heros.getY()+deplacement);}
 			break;
 		case UP:
 			if (check(commande)) {
-			this.heros.setY(this.heros.getY()-20);}
+			this.heros.setY(this.heros.getY()-deplacement);}
 			break;
 		case LEFT:
 			if (check(commande)) {
-			this.heros.setX(this.heros.getX()-20);}
+			this.heros.setX(this.heros.getX()-deplacement);}
 			break;
 		
 		}
 		teleportation();
+		bonus();
+		malus();
 		this.timer.decremente(0.1);
 	}
 
