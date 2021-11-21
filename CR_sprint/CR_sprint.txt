@@ -1,0 +1,8 @@
+Sprint1
+Review: 
+Nous avons réalisés et validés toutes les fonctionnalités du backlog. 
+
+Retrospective:
+Nous avons pris assez de temps à nous familiariser avec git, ce qui nous a retarder dans l'avancement du projet.
+Nous étions aussi assez mal organisé. Nous allons revoir notre organisation pour les sprints suivants.
+Cependant, le projet avance bien, nous avons déja un jeu "jouable".
