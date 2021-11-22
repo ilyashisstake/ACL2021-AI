@@ -1,8 +1,8 @@
 Sprint1
 Review: 
-Nous avons réalisés et validés toutes les fonctionnalités du backlog. 
+Nous avons rÃ©alisÃ©s et validÃ©s toutes les fonctionnalitÃ©s du backlog. 
 
 Retrospective:
-Nous avons pris assez de temps à nous familiariser avec git, ce qui nous a retarder dans l'avancement du projet.
-Nous étions aussi assez mal organisé. Nous allons revoir notre organisation pour les sprints suivants.
-Cependant, le projet avance bien, nous avons déja un jeu "jouable".
+Nous avons pris assez de temps Ã  nous familiariser avec git, ce qui nous a retarder dans l'avancement du projet.
+Nous Ã©tions aussi assez mal organisÃ©. Nous allons revoir notre organisation pour les sprints suivants.
+Cependant, le projet avance bien, nous avons dÃ©ja un jeu "jouable" malgrÃ© qu'on a pas pu compiler sur maven.
