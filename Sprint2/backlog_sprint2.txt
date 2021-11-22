@@ -1,0 +1,31 @@
+
+Backlog sprint 2 :
+
+
+1) La labyrinthe est maintenant généré à partir d'un fichier
+
+2) Le héros doit récupérer un certain nombre de clés pour débloquer la sortie et gagner
+
+3) Des monstres sont placés dans le labyrinthe
+
+4) Certains monstres se déplacent de manière cycliques
+
+5) Les fantômes sont des monstres qui peuvent traverser les murs et qui suivent le joueur
+
+6) Le héros est mort si il entre en contact avec un monstre
+
+
+
+
+Répartition des tâches :
+
+
+1) -> Badr
+
+
+
+3) + 4) + 5) + 6) -> Ibrahim + Abdelrahman
+
+
+
+Diagrammes + Maven 2) -> Ilyas + Ahmed
