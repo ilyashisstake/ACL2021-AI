@@ -48,13 +48,16 @@ public class PacmanPainter implements GamePainter {
 		for(int k=0;k<PacmanGame.cases.getLabyrinthe().length;k++) {
 			crayon.fillRect(PacmanGame.cases.getLabyrinthe()[k][0],PacmanGame.cases.getLabyrinthe()[k][1],taille,taille);
 		}
-		crayon.setColor(Color.cyan);
-		for(int k=0;k<PacmanGame.cases.getSortie().length;k++) {
-			crayon.fillRect(PacmanGame.cases.getSortie()[k][0],PacmanGame.cases.getSortie()[k][1],taille,taille);}
+		if (PacmanGame.cases.getCle().length==0) {
+			crayon.setColor(Color.cyan);
+			for(int k=0;k<PacmanGame.cases.getSortie().length;k++) {
+				crayon.fillRect(PacmanGame.cases.getSortie()[k][0],PacmanGame.cases.getSortie()[k][1],taille,taille);}}
 		crayon.setColor(Color.black);
 		for(int k=0;k<PacmanGame.cases.getPortail().length;k++) {
 			crayon.fillRect(PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],taille,taille);}
-		
+		crayon.setColor(Color.yellow);
+		for(int k=0;k<PacmanGame.cases.getCle().length;k++) {
+			crayon.fillOval(PacmanGame.cases.getCle()[k][0],PacmanGame.cases.getCle()[k][1],taille-8,taille-8);}
 		crayon.setColor(Color.white);
 		crayon.drawString(PacmanGame.timer.toString(), WIDTH/2 - 5, 15);
 		crayon.setColor(Color.red);

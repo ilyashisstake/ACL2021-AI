@@ -26,7 +26,7 @@ public class PacmanGame implements Game {
 	
     public static Heros heros = new Heros(20,20);
 	
-	public static Case cases =new Case();
+	public static Case cases =new Case("plateau.txt");
 	
 	public static Timer timer=new Timer(20);
 	
@@ -101,8 +101,6 @@ public class PacmanGame implements Game {
     public void teleportation() {
     	int x=this.heros.getX();
 		int y=this.heros.getY();
-		System.out.println(x);
-		System.out.println(y);
     	if (contient(this.cases.getPortail(),x,y)){
     		this.heros.setX(20);
     		this.heros.setY(20);
@@ -125,11 +123,16 @@ public class PacmanGame implements Game {
     		PacmanGame.cases.removeMalus(x,y);
     	}
     }
-    
+    public void cles() {
+    	int x=this.heros.getX();
+		int y=this.heros.getY();
+    	if (contient(this.cases.getCle(),x,y)){
+    		PacmanGame.cases.removeCle(x,y);
+    	}
+    }
 	@Override
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
-		System.out.println(this.timer.getTime());
 		int deplacement=20;
 		switch (commande) {
 		// si on appuie sur 'q',commande joueur est gauche
@@ -154,6 +157,7 @@ public class PacmanGame implements Game {
 		teleportation();
 		bonus();
 		malus();
+		cles();
 		this.timer.decremente(0.1);
 	}
 
@@ -164,9 +168,10 @@ public class PacmanGame implements Game {
 	public boolean isFinished() {
 		int x=this.heros.getX();
 		int y=this.heros.getY();
-		if (contient(this.cases.getSortie(),x,y)) {
-			return true;
-		}
+		if (PacmanGame.cases.getCle().length==0) {
+			if (contient(this.cases.getSortie(),x,y)) {
+				return true;
+			}}
 		if (this.timer.getTime()<=0) {
 			return true;
 		}

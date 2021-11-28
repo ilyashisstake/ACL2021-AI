@@ -1,6 +1,9 @@
 package engine;
 
 import java.util.*; 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Case {
 
@@ -13,6 +16,9 @@ public class Case {
 	private int [][] malus;
 	
 	private int [][] sortie; 
+	
+	private int [][] cle; 
+	
 	
 	public Case(){
 		
@@ -222,7 +228,123 @@ public class Case {
 		sortie= new int [][] {{500,320}};
 		bonus= new int [][] {{60,100},{220,140},{440,100}};
 		malus= new int [][] {{500,100},{340,100}};
+		cle= new int [][] {};
 	}
+	
+	public Case(String Fichier) {
+		BufferedReader helpReader;
+		int j=0;
+		List<List<Integer>> liste= new ArrayList<List<Integer>>();
+		List<List<Integer>> listebonus= new ArrayList<List<Integer>>();
+		List<List<Integer>> listemalus= new ArrayList<List<Integer>>();
+		List<List<Integer>> listeportail= new ArrayList<List<Integer>>();
+		List<List<Integer>> listesortie= new ArrayList<List<Integer>>();
+		List<List<Integer>> listecle= new ArrayList<List<Integer>>();
+		
+		try {
+			helpReader = new BufferedReader(new FileReader(Fichier));
+			String ligne;
+			while ((ligne = helpReader.readLine()) != null) {
+				String[] lignes=ligne.split(" ");
+				for (int i = 0; i < lignes.length; i++) {
+		            if(lignes[i].equals("M")) {
+		            	liste.add(new ArrayList<Integer>());
+						liste.get(liste.size()-1).add(i*20);
+						liste.get(liste.size()-1).add(j*20);
+		            }
+		            if(lignes[i].equals("S")) {
+		            	listesortie.add(new ArrayList<Integer>());
+						listesortie.get(listesortie.size()-1).add(i*20);
+						listesortie.get(listesortie.size()-1).add(j*20);
+		            }
+		            if(lignes[i].equals("B")) {
+		            	listebonus.add(new ArrayList<Integer>());
+						listebonus.get(listebonus.size()-1).add(i*20);
+						listebonus.get(listebonus.size()-1).add(j*20);
+		            }
+		            if(lignes[i].equals("P")) {
+		            	listeportail.add(new ArrayList<Integer>());
+						listeportail.get(listeportail.size()-1).add(i*20);
+						listeportail.get(listeportail.size()-1).add(j*20);
+		            }
+		            if(lignes[i].equals("C")) {
+		            	listecle.add(new ArrayList<Integer>());
+						listecle.get(listecle.size()-1).add(i*20);
+						listecle.get(listecle.size()-1).add(j*20);
+		            }
+		            if(lignes[i].equals("Z")) {
+		            	listemalus.add(new ArrayList<Integer>());
+						listemalus.get(listemalus.size()-1).add(i*20);
+						listemalus.get(listemalus.size()-1).add(j*20);
+		            }
+		            
+		        }
+				j=j+1;
+			}
+			helpReader.close();
+		} catch (IOException e) {
+			System.out.println("Plateau not available");
+		}
+		labyrinthe=new int[liste.size()][];
+		for(int k=0;k<liste.size();k++) {
+			 	Object [] l=liste.get(k).toArray();
+			 	int[] obj_int = new int[l.length];
+			 	for(int i=0; i < l.length; i++)
+			 	  
+			 	  obj_int[i]=(int) l[i];
+			 	labyrinthe[k]=obj_int;
+		}
+		portail=new int[listeportail.size()][];
+		for(int k=0;k<listeportail.size();k++) {
+			 	Object [] l=listeportail.get(k).toArray();
+			 	int[] obj_int = new int[l.length];
+			 	for(int i=0; i < l.length; i++)
+			 	  
+			 	  obj_int[i]=(int) l[i];
+			 	portail[k]=obj_int;
+		}
+		sortie=new int[listesortie.size()][];
+		for(int k=0;k<listesortie.size();k++) {
+			 	Object [] l=listesortie.get(k).toArray();
+			 	int[] obj_int = new int[l.length];
+			 	for(int i=0; i < l.length; i++)
+			 	  
+			 	  obj_int[i]=(int) l[i];
+			 	sortie[k]=obj_int;
+		}
+		bonus=new int[listebonus.size()][];
+		for(int k=0;k<listebonus.size();k++) {
+			 	Object [] l=listebonus.get(k).toArray();
+			 	int[] obj_int = new int[l.length];
+			 	for(int i=0; i < l.length; i++)
+			 	  
+			 	  obj_int[i]=(int) l[i];
+			 	bonus[k]=obj_int;
+		}
+		malus=new int[listemalus.size()][];
+		for(int k=0;k<listemalus.size();k++) {
+			 	Object [] l=listemalus.get(k).toArray();
+			 	int[] obj_int = new int[l.length];
+			 	for(int i=0; i < l.length; i++)
+			 	  
+			 	  obj_int[i]=(int) l[i];
+			 	malus[k]=obj_int;
+		}
+		
+		cle=new int[listecle.size()][];
+		for(int k=0;k<listecle.size();k++) {
+			 	Object [] l=listecle.get(k).toArray();
+			 	int[] obj_int = new int[l.length];
+			 	for(int i=0; i < l.length; i++)
+			 	  
+			 	  obj_int[i]=(int) l[i];
+			 	cle[k]=obj_int;
+		}
+		
+		
+		
+	}
+	
 	
 	public int [][] getLabyrinthe(){
 		return labyrinthe;
@@ -238,6 +360,27 @@ public class Case {
 	}
 	public int [][] getPortail(){
 		return portail;
+	}
+	
+	public int [][] getCle(){
+		return cle;
+	}
+	
+	public void removeCle(int x,int y) {
+		 for (int i = 0; i < this.cle.length; i++) {
+			 if (this.cle[i][0]==x && this.cle[i][1]==y) {
+	                int [][] newArr = new int[this.cle.length - 1][2];
+	                for(int index = 0; index < i; index++){
+	                    newArr[index] = this.cle[index];
+	                }
+	                for(int j = i; j < this.cle.length - 1; j++){
+	                    newArr[j] = this.cle[j+1];
+	                }
+	                this.cle=newArr.clone();
+	                break;
+	            }
+	        }
+		
 	}
 	public void removeBonus(int x,int y) {
 		 for (int i = 0; i < this.bonus.length; i++) {
