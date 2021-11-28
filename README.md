@@ -10,4 +10,4 @@ Pour lancer le projet :
 
 - utiliser la commande : "mvn exec:java -Dexec:classMain:start.Main"  dans l'invite de commande git bash
 
-ou  enter la commande suivante : java -cp target/Game-0.0.1-SNAPSHOT.jar start.Main
+ou enter la commande suivante : java -cp target/Game-0.0.1-SNAPSHOT.jar start.Main
