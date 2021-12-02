@@ -81,8 +81,10 @@ public class PacmanGame implements Game {
 			else {return true;}}
 		else {return false;}
 	
+		}
+		return false;
 	}
-	return false;}
+	
 	private static int getWIDHT() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -115,6 +117,7 @@ public class PacmanGame implements Game {
     		PacmanGame.cases.removeBonus(x,y);
     	}
     }
+    
     public void malus() {
     	int x=this.heros.getX();
 		int y=this.heros.getY();
@@ -123,6 +126,7 @@ public class PacmanGame implements Game {
     		PacmanGame.cases.removeMalus(x,y);
     	}
     }
+    
     public void cles() {
     	int x=this.heros.getX();
 		int y=this.heros.getY();
@@ -130,6 +134,7 @@ public class PacmanGame implements Game {
     		PacmanGame.cases.removeCle(x,y);
     	}
     }
+    
 	@Override
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
