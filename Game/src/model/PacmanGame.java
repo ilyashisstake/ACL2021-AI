@@ -216,52 +216,53 @@ public class PacmanGame implements Game {
 		for(int k=0;k<PacmanGame.monstres.size();k++) {
 			int x=PacmanGame.monstres.get(k).getX();
 			int y=PacmanGame.monstres.get(k).getY();
+			int vitesse = PacmanGame.monstres.get(k).getvitesse();
 			if (PacmanGame.monstres.get(k).getDirection()==1) {
 				Cmd cmd=Cmd.UP;
 				if (check(cmd,x,y)){
-					PacmanGame.monstres.get(k).setY(y-10);
+					PacmanGame.monstres.get(k).setY(y-vitesse);
 				}
 				else {
-					PacmanGame.monstres.get(k).setY(y-10);
+					PacmanGame.monstres.get(k).setY(y-vitesse);
 					PacmanGame.monstres.get(k).setDirection(2);
 				}
 			}
 			if (PacmanGame.monstres.get(k).getDirection()==2) {
 				Cmd cmd=Cmd.DOWN;
 				if (check(cmd,x,y)){
-					PacmanGame.monstres.get(k).setY(y+10);
+					PacmanGame.monstres.get(k).setY(y+vitesse);
 				}
 				else {
-					PacmanGame.monstres.get(k).setY(y-10);
+					PacmanGame.monstres.get(k).setY(y-vitesse);
 					PacmanGame.monstres.get(k).setDirection(1);
 				}
 			}
 			if (PacmanGame.monstres.get(k).getDirection()==3) {
 				Cmd cmd=Cmd.RIGHT;
 				if (check(cmd,x,y)){
-					PacmanGame.monstres.get(k).setX(x+10);
+					PacmanGame.monstres.get(k).setX(x+vitesse);
 				}
 				else {
-					PacmanGame.monstres.get(k).setX(x-10);
+					PacmanGame.monstres.get(k).setX(x-vitesse);
 					PacmanGame.monstres.get(k).setDirection(4);
 				}
 			}
 			if (PacmanGame.monstres.get(k).getDirection()==4) {
 				Cmd cmd=Cmd.LEFT;
 				if (check(cmd,x,y)){
-					PacmanGame.monstres.get(k).setX(x-10);
+					PacmanGame.monstres.get(k).setX(x-vitesse);
 				}
 				else {
-					PacmanGame.monstres.get(k).setX(x+10);
+					PacmanGame.monstres.get(k).setX(x+vitesse);
 					PacmanGame.monstres.get(k).setDirection(3);
 				}
 			}
 			if (PacmanGame.monstres.get(k).getDirection()==0) {
 				List<Double> liste= new ArrayList<>();
-				double d0=distance(x,y-5,x0,y0);
-				double d1=distance(x,y+5,x0,y0);
-				double d2=distance(x+5,y,x0,y0);
-				double d3=distance(x-5,y,x0,y0);
+				double d0=distance(x,y-vitesse,x0,y0);
+				double d1=distance(x,y+vitesse,x0,y0);
+				double d2=distance(x+vitesse,y,x0,y0);
+				double d3=distance(x-vitesse,y,x0,y0);
 				liste.add(d0);
 				liste.add(d1);
 				liste.add(d2);
@@ -269,16 +270,16 @@ public class PacmanGame implements Game {
 				
 				int indice= liste.indexOf(Collections.min(liste));
 				if (indice==0) {
-					PacmanGame.monstres.get(k).setY(y-5);
+					PacmanGame.monstres.get(k).setY(y-vitesse);
 				}
 				if (indice==1) {
-					PacmanGame.monstres.get(k).setY(y+5);
+					PacmanGame.monstres.get(k).setY(y+vitesse);
 				}
 				if (indice==2) {
-					PacmanGame.monstres.get(k).setX(x+5);
+					PacmanGame.monstres.get(k).setX(x+vitesse);
 				}
 				if (indice==3) {
-					PacmanGame.monstres.get(k).setX(x-5);
+					PacmanGame.monstres.get(k).setX(x-vitesse);
 				}
 		
 	}
