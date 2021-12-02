@@ -3,12 +3,16 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import engine.Case;
 import engine.Cmd;
 import engine.Game;
 import engine.Heros;
 import engine.Timer;
+import engine.Monster;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -30,7 +34,9 @@ public class PacmanGame implements Game {
 	
 	public static Timer timer=new Timer(20);
 	
-	public PacmanGame(String source) {
+	public static List<Monster> monstres;
+	
+	public PacmanGame(String source, String fichier) {
 		BufferedReader helpReader;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
@@ -42,6 +48,43 @@ public class PacmanGame implements Game {
 		} catch (IOException e) {
 			System.out.println("Help not available");
 		}
+		BufferedReader helpReader1;
+		monstres= new ArrayList<Monster>();
+		try {
+			helpReader1 = new BufferedReader(new FileReader(fichier));
+			String ligne;
+			int j=0;
+			while ((ligne = helpReader1.readLine()) != null) {
+				String[] lignes=ligne.split(" ");
+				for (int i = 0; i < lignes.length; i++) {
+					if(lignes[i].equals("0")) {
+						Monster monster = new Monster(i*20,j*20,0);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("1")) {
+						Monster monster = new Monster(i*20,j*20,1);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("2")) {
+						Monster monster = new Monster(i*20,j*20,2);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("3")) {
+						Monster monster = new Monster(i*20,j*20,3);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("4")) {
+						Monster monster = new Monster(i*20,j*20,4);
+						monstres.add(monster);
+					}
+				}
+				j=j+1;
+			}
+			helpReader1.close();
+		} catch (IOException e) {
+			System.out.println("Plateau non valide !!!");
+		
+	}
 	}
 
 	/**
@@ -50,9 +93,7 @@ public class PacmanGame implements Game {
 	 * @param commande
 	 */
 	
-	public boolean check(Cmd commande) {
-		int x=this.heros.getX();
-		int y=this.heros.getY();
+	public boolean check(Cmd commande,int x,int y) {
 	switch (commande) {	
 	case RIGHT:
 		if (x+40<PacmanPainter.WIDTH) {
@@ -139,26 +180,29 @@ public class PacmanGame implements Game {
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
 		int deplacement=20;
+		int x=this.heros.getX();
+		int y=this.heros.getY();
 		switch (commande) {
 		// si on appuie sur 'q',commande joueur est gauche
 		case RIGHT:
-			if (check(commande)) {
+			if (check(commande,x,y)) {
 			this.heros.setX(this.heros.getX()+deplacement);}
 			break;
 		case DOWN:
-			if (check(commande)) {
+			if (check(commande,x,y)) {
 			this.heros.setY(this.heros.getY()+deplacement);}
 			break;
 		case UP:
-			if (check(commande)) {
+			if (check(commande,x,y)) {
 			this.heros.setY(this.heros.getY()-deplacement);}
 			break;
 		case LEFT:
-			if (check(commande)) {
+			if (check(commande,x,y)) {
 			this.heros.setX(this.heros.getX()-deplacement);}
 			break;
 		
 		}
+		deplacementMonstre();
 		teleportation();
 		bonus();
 		malus();
@@ -166,6 +210,100 @@ public class PacmanGame implements Game {
 		this.timer.decremente(0.1);
 	}
 
+	public void deplacementMonstre() {
+		int x0=PacmanGame.heros.getX();
+		int y0=PacmanGame.heros.getY();
+		for(int k=0;k<PacmanGame.monstres.size();k++) {
+			int x=PacmanGame.monstres.get(k).getX();
+			int y=PacmanGame.monstres.get(k).getY();
+			if (PacmanGame.monstres.get(k).getDirection()==1) {
+				Cmd cmd=Cmd.UP;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setY(y-10);
+				}
+				else {
+					PacmanGame.monstres.get(k).setY(y-10);
+					PacmanGame.monstres.get(k).setDirection(2);
+				}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==2) {
+				Cmd cmd=Cmd.DOWN;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setY(y+10);
+				}
+				else {
+					PacmanGame.monstres.get(k).setY(y-10);
+					PacmanGame.monstres.get(k).setDirection(1);
+				}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==3) {
+				Cmd cmd=Cmd.RIGHT;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setX(x+10);
+				}
+				else {
+					PacmanGame.monstres.get(k).setX(x-10);
+					PacmanGame.monstres.get(k).setDirection(4);
+				}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==4) {
+				Cmd cmd=Cmd.LEFT;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setX(x-10);
+				}
+				else {
+					PacmanGame.monstres.get(k).setX(x+10);
+					PacmanGame.monstres.get(k).setDirection(3);
+				}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==0) {
+				List<Double> liste= new ArrayList<>();
+				double d0=distance(x,y-5,x0,y0);
+				double d1=distance(x,y+5,x0,y0);
+				double d2=distance(x+5,y,x0,y0);
+				double d3=distance(x-5,y,x0,y0);
+				liste.add(d0);
+				liste.add(d1);
+				liste.add(d2);
+				liste.add(d3);
+				
+				int indice= liste.indexOf(Collections.min(liste));
+				if (indice==0) {
+					PacmanGame.monstres.get(k).setY(y-5);
+				}
+				if (indice==1) {
+					PacmanGame.monstres.get(k).setY(y+5);
+				}
+				if (indice==2) {
+					PacmanGame.monstres.get(k).setX(x+5);
+				}
+				if (indice==3) {
+					PacmanGame.monstres.get(k).setX(x-5);
+				}
+		
+	}
+		}
+	}
+	
+	public double distance(int x,int y,int x0,int y0) {
+		double distance=Math.sqrt(Math.pow((x-x0),2)+Math.pow((y-y0),2));
+		return distance;
+	}
+	
+	public boolean estMort(int x,int y) {
+		for(int k=0;k<PacmanGame.monstres.size();k++) {
+			if (x==PacmanGame.monstres.get(k).getX() && y==PacmanGame.monstres.get(k).getY()) {
+				return true;
+			}
+			if (x==PacmanGame.monstres.get(k).getX() && Math.abs(y-PacmanGame.monstres.get(k).getY())<=10){
+				return true;
+			}
+			if (Math.abs(x-PacmanGame.monstres.get(k).getX())<=10 && y==PacmanGame.monstres.get(k).getY()){
+				return true;
+			}
+		}
+		return false;
+	}
 	/**
 	 * verifier si le jeu est fini
 	 */
@@ -178,6 +316,9 @@ public class PacmanGame implements Game {
 				return true;
 			}}
 		if (this.timer.getTime()<=0) {
+			return true;
+		}
+		if (estMort(x,y)) {
 			return true;
 		}
 		return false;

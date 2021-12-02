@@ -56,9 +56,9 @@ public class DrawingPanel extends JPanel {
 
 		// cree l'image buffer et son graphics
 		this.nextImage = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
+				BufferedImage.TYPE_INT_ARGB);
 		this.currentImage = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
+				BufferedImage.TYPE_INT_ARGB);
 	}
 
 	/**

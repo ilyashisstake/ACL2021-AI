@@ -22,7 +22,7 @@ public interface Game {
 	 */
 	public boolean isFinished();
 	
-	public boolean check(Cmd userCmd);
+	public boolean check(Cmd userCmd, int x,int y);
 	
 	public boolean contient(int [][]tab,int x,int y);
 
