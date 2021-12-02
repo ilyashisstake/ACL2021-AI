@@ -14,7 +14,7 @@ public class Monster {
 			this.vitesse = 3;
 		}
 		else {
-			this.vitesse = 8;
+			this.vitesse = 10;
 		}
 	}
 	

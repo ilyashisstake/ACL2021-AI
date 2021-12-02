@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import engine.Case;
 import engine.GamePainter;
 import engine.Heros;
+import engine.Monster;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -43,7 +44,22 @@ public class PacmanPainter implements GamePainter {
 	public void draw(BufferedImage im) {
 		int taille=20;
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
-		crayon.setColor(Color.gray);
+		
+		//affichage du fond
+		crayon.setColor(Color.cyan.brighter());
+		for(int i=0;i<WIDTH;i=i+20) {
+			for(int j=0;j<WIDTH;j=j+20) {
+				crayon.fillRect(i,j,taille,taille);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//Affichage des murs
 		/*for(int k=0;k<WIDTH;k=k+10) {
@@ -65,14 +81,30 @@ public class PacmanPainter implements GamePainter {
 		
 		//Affichage case sortie
 		if (PacmanGame.cases.getCle().length==0) {
-			crayon.setColor(Color.cyan);
+			crayon.setColor(Color.yellow);
 			for(int k=0;k<PacmanGame.cases.getSortie().length;k++) {
 				crayon.fillRect(PacmanGame.cases.getSortie()[k][0],PacmanGame.cases.getSortie()[k][1],taille,taille);}}
 		
-		//Affichage cases portail
-		crayon.setColor(Color.black);
+		//Affichage cases portail 
+		
+		//version sans image
+		crayon.setColor(Color.magenta);
 		for(int k=0;k<PacmanGame.cases.getPortail().length;k++) {
 			crayon.fillRect(PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],taille,taille);}
+			 
+		//version avec image
+		/* 
+		try {
+			BufferedImage image_portal= ImageIO.read(new File("vortex.png"));
+			for(int k=0;k<PacmanGame.cases.getPortail().length;k++) {
+			crayon.drawImage(image_portal,PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],20,20,null);}
+		}catch (IOException e) {
+			System.out.println("image portail non valide !!!");
+			crayon.setColor(Color.magenta);
+			for(int k=0;k<PacmanGame.cases.getPortail().length;k++) {
+				crayon.fillRect(PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],taille,taille);}
+		}
+		*/
 		
 		//Affichage clé
 		try {
@@ -84,7 +116,7 @@ public class PacmanPainter implements GamePainter {
 			crayon.setColor(Color.yellow);
 			for(int k=0;k<PacmanGame.cases.getCle().length;k++) {
 				crayon.fillOval(PacmanGame.cases.getCle()[k][0],PacmanGame.cases.getCle()[k][1],taille-8,taille-8);}
-	}
+		}
 		
 		//Affichage timer
 		crayon.setColor(Color.white);
@@ -109,7 +141,12 @@ public class PacmanPainter implements GamePainter {
 		//Affichage monstre
 		crayon.setColor(Color.black);
 		for (int k=0; k<PacmanGame.monstres.size();k++) {
-			crayon.fillOval(PacmanGame.monstres.get(k).getX(),PacmanGame.monstres.get(k).getY(),taille,taille);
+			Monster monstre = PacmanGame.monstres.get(k);
+			if (monstre.getDirection() == 0) {
+				crayon.setColor(Color.white);
+			}
+			crayon.fillOval(monstre.getX(),monstre.getY(),taille,taille);
+			crayon.setColor(Color.black);
 		}
 		
 		
