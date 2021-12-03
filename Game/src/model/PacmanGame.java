@@ -77,6 +77,22 @@ public class PacmanGame implements Game {
 						Monster monster = new Monster(i*20,j*20,4);
 						monstres.add(monster);
 					}
+					if(lignes[i].equals("5")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("6")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("7")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("8")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
 				}
 				j=j+1;
 			}
@@ -282,7 +298,47 @@ public class PacmanGame implements Game {
 					PacmanGame.monstres.get(k).setX(x-vitesse);
 				}
 		
-	}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==5) {
+				Cmd cmd=Cmd.UP;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setY(y-vitesse);
+				}
+				else {
+					PacmanGame.monstres.get(k).setX(x+vitesse);
+					PacmanGame.monstres.get(k).setDirection(6);
+				}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==6) {
+				Cmd cmd=Cmd.RIGHT;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setX(x+vitesse);
+				}
+				else {
+					PacmanGame.monstres.get(k).setY(y+vitesse);
+					PacmanGame.monstres.get(k).setDirection(7);
+				}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==7) {
+				Cmd cmd=Cmd.DOWN;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setY(y+vitesse);
+				}
+				else {
+					PacmanGame.monstres.get(k).setX(x-vitesse);
+					PacmanGame.monstres.get(k).setDirection(8);
+				}
+			}
+			if (PacmanGame.monstres.get(k).getDirection()==8) {
+				Cmd cmd=Cmd.LEFT;
+				if (check(cmd,x,y)){
+					PacmanGame.monstres.get(k).setX(x-vitesse);
+				}
+				else {
+					PacmanGame.monstres.get(k).setY(y-vitesse);
+					PacmanGame.monstres.get(k).setDirection(5);
+				}
+			}
 		}
 	}
 	
