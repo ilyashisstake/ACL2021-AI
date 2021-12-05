@@ -88,23 +88,23 @@ public class PacmanPainter implements GamePainter {
 		//Affichage cases portail 
 		
 		//version sans image
-		crayon.setColor(Color.magenta);
+		/*crayon.setColor(Color.magenta);
 		for(int k=0;k<PacmanGame.cases.getPortail().length;k++) {
 			crayon.fillRect(PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],taille,taille);}
-			 
+			 */
 		//version avec image
-		/* 
+		
 		try {
-			BufferedImage image_portal= ImageIO.read(new File("vortex.png"));
+			BufferedImage image_portal= ImageIO.read(new File("portal.png"));
 			for(int k=0;k<PacmanGame.cases.getPortail().length;k++) {
-			crayon.drawImage(image_portal,PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],20,20,null);}
+			crayon.drawImage(image_portal,PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],25,30,null);}
 		}catch (IOException e) {
 			System.out.println("image portail non valide !!!");
 			crayon.setColor(Color.magenta);
 			for(int k=0;k<PacmanGame.cases.getPortail().length;k++) {
 				crayon.fillRect(PacmanGame.cases.getPortail()[k][0],PacmanGame.cases.getPortail()[k][1],taille,taille);}
 		}
-		*/
+		
 		
 		//Affichage clé
 		try {

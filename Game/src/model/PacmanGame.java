@@ -358,6 +358,9 @@ public class PacmanGame implements Game {
 			if (Math.abs(x-PacmanGame.monstres.get(k).getX())<=10 && y==PacmanGame.monstres.get(k).getY()){
 				return true;
 			}
+			if (Math.abs(y-PacmanGame.monstres.get(k).getY())<=10 && Math.abs(x-PacmanGame.monstres.get(k).getX())<=10) {
+				return true;
+			}
 		}
 		return false;
 	}
