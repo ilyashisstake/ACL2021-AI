@@ -1,0 +1,8 @@
+﻿Sprint2
+Review: 
+Nous avons réalisé et validé toutes les fonctionnalités du backlog. 
+
+Retrospective:
+Nous avons revu notre organisation. Ce qui a été très bénéfique car nous avons pu avancer sur le jeu dès le début du sprint.
+Le jeu avance bien, nous constatons aucun bug et le jeu possèdent de nombreuses fonctionnalités.
+De plus, nous nous familiarisons de plus en plus avec git. 
