@@ -28,7 +28,7 @@ public class PacmanGame implements Game {
 	 * 
 	 */
 	
-    public static Heros heros = new Heros(20,20);
+    public static Heros heros = new Heros(20,20,3);
 	
 	public static Case cases =new Case("plateau.txt");
 	
@@ -142,6 +142,8 @@ public class PacmanGame implements Game {
 		return false;
 	}
 	
+	
+	
 	private static int getWIDHT() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -183,6 +185,14 @@ public class PacmanGame implements Game {
     		PacmanGame.cases.removeMalus(x,y);
     	}
     }
+    public void potion() {
+    	int x=this.heros.getX();
+		int y=this.heros.getY();
+		if (contient(this.cases.getPotion(),x,y)) {
+			cases.removePotion(x, y);
+			timer.setTimeInvincible(timer.getTime_invinvible()+5);
+		}
+    }
     
     public void cles() {
     	int x=this.heros.getX();
@@ -223,6 +233,16 @@ public class PacmanGame implements Game {
 		bonus();
 		malus();
 		cles();
+		potion();
+		if (timer.getTime_invinvible()<=0) {
+		if (heros.getVie()>1) {
+			if (estMort(x,y)) {
+				heros.setVie(heros.getVie()-1);
+				heros.setX(20);
+				heros.setY(20);
+			}}
+		}
+		else {timer.setTimeInvincible(timer.getTime_invinvible()-0.1);}
 		this.timer.decremente(0.1);
 	}
 
@@ -378,9 +398,12 @@ public class PacmanGame implements Game {
 		if (this.timer.getTime()<=0) {
 			return true;
 		}
+		if (timer.getTime_invinvible()<=0) {
+		if (heros.getVie()==1) {
 		if (estMort(x,y)) {
+			heros.setVie(0);
 			return true;
-		}
+		}}}
 		return false;
 	}
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.awt.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -117,12 +118,42 @@ public class PacmanPainter implements GamePainter {
 			for(int k=0;k<PacmanGame.cases.getCle().length;k++) {
 				crayon.fillOval(PacmanGame.cases.getCle()[k][0],PacmanGame.cases.getCle()[k][1],taille-8,taille-8);}
 		}
-		
+		//Affichage potion
+		try {
+			BufferedImage image= ImageIO.read(new File("potion.png"));
+			for(int k=0;k<PacmanGame.cases.getPotion().length;k++) {
+				crayon.drawImage(image,PacmanGame.cases.getPotion()[k][0],PacmanGame.cases.getPotion()[k][1],20,20,null);}
+			}catch (IOException e) {
+			System.out.println("image potion non valide !!!");
+			crayon.setColor(Color.red);
+			for(int k=0;k<PacmanGame.cases.getPotion().length;k++) {
+			crayon.fillOval(PacmanGame.cases.getPotion()[k][0],PacmanGame.cases.getPotion()[k][1],taille-8,taille-8);}
+			}
 		//Affichage timer
 		crayon.setColor(Color.white);
+		crayon.setFont(new Font("SansSerif",Font.BOLD, 15));
 		crayon.drawString(PacmanGame.timer.toString(), WIDTH/2 - 5, 15);
+		if (PacmanGame.timer.getTime_invinvible()>0) {
+			String a=Double.toString(PacmanGame.timer.getTime_invinvible());
+			crayon.drawString("Invincibilite :", WIDTH/2+70, 15);
+			crayon.drawString(a, WIDTH/2 +160, 15);
+		}
 		
-		
+		//Affichage vie
+		crayon.setColor(Color.white);
+		crayon.setFont(new Font("SansSerif",Font.BOLD, 15));
+		crayon.drawString("Vie: ", WIDTH/2 - 30, HEIGHT-5);
+		try {
+			BufferedImage image= ImageIO.read(new File("vie.png"));
+			for(int k=0;k<PacmanGame.heros.getVie();k++) {
+			crayon.drawImage(image,WIDTH/2+k*20,HEIGHT-20,20,20,null);}
+		}catch (IOException e) {
+			System.out.println("image vie non valide !!!");
+			crayon.setColor(Color.red);
+			for(int k=0;k<PacmanGame.heros.getVie();k++) {
+				crayon.fillOval(WIDTH/2+k*20,HEIGHT-20,taille,taille);
+		}
+		}
 		//Affichage cases malus
 		crayon.setColor(Color.red);
 		for(int k=0;k<PacmanGame.cases.getMalus().length;k++) {
