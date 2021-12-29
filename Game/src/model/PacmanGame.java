@@ -36,6 +36,16 @@ public class PacmanGame implements Game {
 	
 	public static List<Monster> monstres;
 	
+	private int niveau;
+	
+	public int getNiveau() {
+		return niveau;
+	}
+
+	public void setNiveau(int niveau) {
+		this.niveau = niveau;
+	}
+
 	public PacmanGame(String source, String fichier) {
 		BufferedReader helpReader;
 		try {
@@ -101,6 +111,7 @@ public class PacmanGame implements Game {
 			System.out.println("Plateau non valide !!!");
 		
 	}
+		this.niveau=1;
 	}
 
 	/**
@@ -429,7 +440,7 @@ public class PacmanGame implements Game {
 				if (Math.abs(y1-PacmanGame.monstres.get(j).getY())<=10 && Math.abs(x1-PacmanGame.monstres.get(j).getX())<=10) {
 					heros.getMunition().remove(k);
 					monstres.remove(j);
-					
+					break;
 				}}
 			}
 		for (int k=0;k<heros.getMunition().size();k++) {
