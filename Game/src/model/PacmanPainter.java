@@ -150,6 +150,10 @@ public class PacmanPainter implements GamePainter {
 			crayon.drawString("Invincibilite :", WIDTH-135, 15);
 			crayon.drawString(a, WIDTH-40, 15);
 		}
+		
+		// Affichage niveau
+		crayon.drawString("Niveau :", 20, HEIGHT-5);
+		crayon.drawString(Integer.toString(PacmanGame.getNiveau()),80,HEIGHT-5);
 		// Affichage nombre de munition
 		crayon.drawString("Munition :", 20, 15);
 		String a;

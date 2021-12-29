@@ -36,12 +36,67 @@ public class PacmanGame implements Game {
 	
 	public static List<Monster> monstres;
 	
-	private int niveau;
+	private static int niveau;
 	
-	public int getNiveau() {
+	public static int getNiveau() {
 		return niveau;
 	}
 
+	public void setMonstres(String fichier) {
+		BufferedReader helpReader1;
+		monstres= new ArrayList<Monster>();
+		try {
+			helpReader1 = new BufferedReader(new FileReader(fichier));
+			String ligne;
+			int j=0;
+			while ((ligne = helpReader1.readLine()) != null) {
+				String[] lignes=ligne.split(" ");
+				for (int i = 0; i < lignes.length; i++) {
+					if(lignes[i].equals("0")) {
+						Monster monster = new Monster(i*20,j*20,0);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("1")) {
+						Monster monster = new Monster(i*20,j*20,1);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("2")) {
+						Monster monster = new Monster(i*20,j*20,2);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("3")) {
+						Monster monster = new Monster(i*20,j*20,3);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("4")) {
+						Monster monster = new Monster(i*20,j*20,4);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("5")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("6")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("7")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
+					if(lignes[i].equals("8")) {
+						Monster monster = new Monster(i*20,j*20,5);
+						monstres.add(monster);
+					}
+				}
+				j=j+1;
+			}
+			helpReader1.close();
+		} catch (IOException e) {
+			System.out.println("Plateau non valide !!!");
+		
+	}
+	}
 	public void setNiveau(int niveau) {
 		this.niveau = niveau;
 	}
@@ -314,6 +369,25 @@ public class PacmanGame implements Game {
 			}}
 		}
 		else {timer.setTimeInvincible(timer.getTime_invinvible()-0.1);}
+		if (this.niveau<3) {
+			if (PacmanGame.cases.getCle().length==0) {
+				if (contient(this.cases.getSortie(),x,y)) {
+					if (this.niveau==1) {
+						cases=new Case("plateau2.txt");
+						heros=new Heros(20,20,3);
+						timer=new Timer(30);
+						niveau=niveau+1;
+						setMonstres("plateau2.txt");
+					}
+					else {
+						cases=new Case("plateau3.txt");
+						heros=new Heros(20,20,3);
+						timer=new Timer(30);
+						setMonstres("plateau3.txt");
+						niveau=niveau+1;
+					}
+				}}
+		}
 		this.timer.decremente(0.1);
 	}
 
@@ -524,10 +598,11 @@ public class PacmanGame implements Game {
 	public boolean isFinished() {
 		int x=this.heros.getX();
 		int y=this.heros.getY();
+		if (this.niveau==3) {
 		if (PacmanGame.cases.getCle().length==0) {
 			if (contient(this.cases.getSortie(),x,y)) {
 				return true;
-			}}
+			}}}
 		if (this.timer.getTime()<=0) {
 			return true;
 		}
