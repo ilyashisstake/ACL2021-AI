@@ -21,6 +21,8 @@ public class Case {
 	
 	private int [][] potion; 
 	
+	private int [][] munition;
+	
 	
 	public Case(){
 		
@@ -232,6 +234,7 @@ public class Case {
 		malus= new int [][] {{500,100},{340,100}};
 		cle= new int [][] {};
 		potion= new int [][] {};
+		munition= new int [][] {};
 	}
 	
 	public Case(String Fichier) {
@@ -244,7 +247,7 @@ public class Case {
 		List<List<Integer>> listesortie= new ArrayList<List<Integer>>();
 		List<List<Integer>> listecle= new ArrayList<List<Integer>>();
 		List<List<Integer>> listepotion= new ArrayList<List<Integer>>();
-		
+		List<List<Integer>> listemunition= new ArrayList<List<Integer>>();
 		try {
 			helpReader = new BufferedReader(new FileReader(Fichier));
 			String ligne;
@@ -285,6 +288,11 @@ public class Case {
 		            	listepotion.add(new ArrayList<Integer>());
 						listepotion.get(listepotion.size()-1).add(i*20);
 						listepotion.get(listepotion.size()-1).add(j*20);
+		            }
+		            if(lignes[i].equals("O")) {
+		            	listemunition.add(new ArrayList<Integer>());
+						listemunition.get(listemunition.size()-1).add(i*20);
+						listemunition.get(listemunition.size()-1).add(j*20);
 		            }
 		        }
 				j=j+1;
@@ -358,7 +366,15 @@ public class Case {
 			 	potion[k]=obj_int;
 		}
 		
-		
+		munition=new int[listemunition.size()][];
+		for(int k=0;k<listemunition.size();k++) {
+			 	Object [] l=listemunition.get(k).toArray();
+			 	int[] obj_int = new int[l.length];
+			 	for(int i=0; i < l.length; i++)
+			 	  
+			 	  obj_int[i]=(int) l[i];
+			 	munition[k]=obj_int;
+		}
 		
 	}
 	
@@ -385,6 +401,11 @@ public class Case {
 	public int [][] getPotion(){
 		return potion;
 	}
+	
+	public int [][] getMunition(){
+		return munition;
+	}
+	
 	public void removePotion(int x,int y) {
 		 for (int i = 0; i < this.potion.length; i++) {
 			 if (this.potion[i][0]==x && this.potion[i][1]==y) {
@@ -396,6 +417,22 @@ public class Case {
 	                    newArr[j] = this.potion[j+1];
 	                }
 	                this.potion=newArr.clone();
+	                break;
+	            }
+	        }
+		
+	}
+	public void removeMunition(int x,int y) {
+		 for (int i = 0; i < this.munition.length; i++) {
+			 if (this.munition[i][0]==x && this.munition[i][1]==y) {
+	                int [][] newArr = new int[this.munition.length - 1][2];
+	                for(int index = 0; index < i; index++){
+	                    newArr[index] = this.munition[index];
+	                }
+	                for(int j = i; j < this.munition.length - 1; j++){
+	                    newArr[j] = this.munition[j+1];
+	                }
+	                this.munition=newArr.clone();
 	                break;
 	            }
 	        }

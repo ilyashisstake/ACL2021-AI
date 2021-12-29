@@ -201,6 +201,14 @@ public class PacmanGame implements Game {
     		PacmanGame.cases.removeCle(x,y);
     	}
     }
+    public void munition() {
+    	int x=this.heros.getX();
+		int y=this.heros.getY();
+    	if (contient(this.cases.getMunition(),x,y)){
+    		PacmanGame.cases.removeMunition(x,y);
+    		heros.addMunition();
+    	}
+    }
     
 	@Override
 	public void evolve(Cmd commande) {
@@ -226,14 +234,66 @@ public class PacmanGame implements Game {
 			if (check(commande,x,y)) {
 			this.heros.setX(this.heros.getX()-deplacement);}
 			break;
+		case ATQD:
+			if (heros.munitiondispo()>0) {
+				for (int k=0;k<heros.getMunition().size();k++) {
+					if (heros.getMunition().get(k).getDirection()==0) {
+						heros.getMunition().get(k).setDirection(1);
+						heros.getMunition().get(k).setX(x);
+						heros.getMunition().get(k).setY(y);
+						break;
+					}
+			}
+		}
+			break;
+		
+		case ATQG:
+			if (heros.munitiondispo()>0) {
+				for (int k=0;k<heros.getMunition().size();k++) {
+					if (heros.getMunition().get(k).getDirection()==0) {
+						heros.getMunition().get(k).setDirection(2);
+						heros.getMunition().get(k).setX(x);
+						heros.getMunition().get(k).setY(y);
+						break;
+					}
+			}
+		}
+			break;
+		
+		case ATQH:
+			if (heros.munitiondispo()>0) {
+				for (int k=0;k<heros.getMunition().size();k++) {
+					if (heros.getMunition().get(k).getDirection()==0) {
+						heros.getMunition().get(k).setDirection(3);
+						heros.getMunition().get(k).setX(x);
+						heros.getMunition().get(k).setY(y);
+						break;
+					}
+			}
+		}
+			break;
+		case ATQB:
+			if (heros.munitiondispo()>0) {
+				for (int k=0;k<heros.getMunition().size();k++) {
+					if (heros.getMunition().get(k).getDirection()==0) {
+						heros.getMunition().get(k).setDirection(4);
+						heros.getMunition().get(k).setX(x);
+						heros.getMunition().get(k).setY(y);
+						break;
+					}
+			}
+		}
+			break;
 		
 		}
 		deplacementMonstre();
+		deplacementmunition();
 		teleportation();
 		bonus();
 		malus();
 		cles();
 		potion();
+		munition();
 		if (timer.getTime_invinvible()<=0) {
 		if (heros.getVie()>1) {
 			if (estMort(x,y)) {
@@ -361,7 +421,69 @@ public class PacmanGame implements Game {
 			}
 		}
 	}
-	
+	public void deplacementmunition() {
+		for (int k=0;k<heros.getMunition().size();k++) {
+			for(int j=0;j<PacmanGame.monstres.size();j++) {
+				int x1=heros.getMunition().get(k).getX();
+				int y1=heros.getMunition().get(k).getY();
+				if (Math.abs(y1-PacmanGame.monstres.get(j).getY())<=10 && Math.abs(x1-PacmanGame.monstres.get(j).getX())<=10) {
+					heros.getMunition().remove(k);
+					monstres.remove(j);
+					
+				}}
+			}
+		for (int k=0;k<heros.getMunition().size();k++) {
+			if(heros.getMunition().get(k).getDirection()==1) {
+				Cmd cmd=Cmd.RIGHT;
+				if (check(cmd,heros.getMunition().get(k).getX(),heros.getMunition().get(k).getY())) {
+					heros.getMunition().get(k).setX(20+heros.getMunition().get(k).getX());
+				}
+				else {
+					heros.getMunition().remove(k);
+				}
+				
+			}}
+			for (int k=0;k<heros.getMunition().size();k++) {
+			if(heros.getMunition().get(k).getDirection()==2) {
+				Cmd cmd=Cmd.LEFT;
+				if (check(cmd,heros.getMunition().get(k).getX(),heros.getMunition().get(k).getY())) {
+					heros.getMunition().get(k).setX(-20+heros.getMunition().get(k).getX());
+				}
+				else {
+					heros.getMunition().remove(k);
+				}
+				
+			}
+			
+		}
+			for (int k=0;k<heros.getMunition().size();k++) {
+				if(heros.getMunition().get(k).getDirection()==3) {
+					Cmd cmd=Cmd.UP;
+					if (check(cmd,heros.getMunition().get(k).getX(),heros.getMunition().get(k).getY())) {
+						heros.getMunition().get(k).setY(-20+heros.getMunition().get(k).getY());
+					}
+					else {
+						heros.getMunition().remove(k);
+					}
+					
+				}
+				
+			}
+			for (int k=0;k<heros.getMunition().size();k++) {
+				if(heros.getMunition().get(k).getDirection()==4) {
+					Cmd cmd=Cmd.DOWN;
+					if (check(cmd,heros.getMunition().get(k).getX(),heros.getMunition().get(k).getY())) {
+						heros.getMunition().get(k).setY(20+heros.getMunition().get(k).getY());
+					}
+					else {
+						heros.getMunition().remove(k);
+					}
+					
+				}
+				
+			}
+		
+	}
 	public double distance(int x,int y,int x0,int y0) {
 		double distance=Math.sqrt(Math.pow((x-x0),2)+Math.pow((y-y0),2));
 		return distance;

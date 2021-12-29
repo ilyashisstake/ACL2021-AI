@@ -118,6 +118,18 @@ public class PacmanPainter implements GamePainter {
 			for(int k=0;k<PacmanGame.cases.getCle().length;k++) {
 				crayon.fillOval(PacmanGame.cases.getCle()[k][0],PacmanGame.cases.getCle()[k][1],taille-8,taille-8);}
 		}
+		//Affichage munition
+				try {
+					BufferedImage image= ImageIO.read(new File("munition.png"));
+					for(int k=0;k<PacmanGame.cases.getMunition().length;k++) {
+					crayon.drawImage(image,PacmanGame.cases.getMunition()[k][0],PacmanGame.cases.getMunition()[k][1],20,20,null);}
+				}catch (IOException e) {
+					System.out.println("image munition non valide !!!");
+					crayon.setColor(Color.green);
+					for(int k=0;k<PacmanGame.cases.getMunition().length;k++) {
+						crayon.fillOval(PacmanGame.cases.getMunition()[k][0],PacmanGame.cases.getMunition()[k][1],taille-8,taille-8);}
+				}
+		
 		//Affichage potion
 		try {
 			BufferedImage image= ImageIO.read(new File("potion.png"));
@@ -135,9 +147,37 @@ public class PacmanPainter implements GamePainter {
 		crayon.drawString(PacmanGame.timer.toString(), WIDTH/2 - 5, 15);
 		if (PacmanGame.timer.getTime_invinvible()>0) {
 			String a=Double.toString(PacmanGame.timer.getTime_invinvible());
-			crayon.drawString("Invincibilite :", WIDTH/2+70, 15);
-			crayon.drawString(a, WIDTH/2 +160, 15);
+			crayon.drawString("Invincibilite :", WIDTH-135, 15);
+			crayon.drawString(a, WIDTH-40, 15);
 		}
+		// Affichage nombre de munition
+		crayon.drawString("Munition :", 20, 15);
+		String a;
+		if (PacmanGame.heros.getMunition()==null) {
+			a="0";
+		}
+		else{a = Integer.toString(PacmanGame.heros.munitiondispo());}
+		crayon.drawString(a, 100, 15);
+		try {
+		for(int k=0;k<PacmanGame.heros.getMunition().size();k++) {
+			if (PacmanGame.heros.getMunition().get(k).getDirection()==1) {
+				BufferedImage image= ImageIO.read(new File("balle.png"));
+			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+			if (PacmanGame.heros.getMunition().get(k).getDirection()==3) {
+				BufferedImage image= ImageIO.read(new File("balle2.png"));
+			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+			if (PacmanGame.heros.getMunition().get(k).getDirection()==2) {
+				BufferedImage image= ImageIO.read(new File("balle3.png"));
+			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+			if (PacmanGame.heros.getMunition().get(k).getDirection()==4) {
+				BufferedImage image= ImageIO.read(new File("balle4.png"));
+			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+		}
+		}catch (IOException e) {
+			System.out.println("image balle non valide !!!");}
+		
+		
+		
 		
 		//Affichage vie
 		crayon.setColor(Color.white);
@@ -170,6 +210,15 @@ public class PacmanPainter implements GamePainter {
 		
 		
 		//Affichage monstre
+		/*
+		try {
+			BufferedImage image= ImageIO.read(new File("monstre2.png"));
+			for (int k=0; k<PacmanGame.monstres.size();k++) {
+				Monster monstre = PacmanGame.monstres.get(k);
+				crayon.drawImage(image,monstre.getX(),monstre.getY(),20,20,null);
+			}
+		}catch (IOException e) {
+			System.out.println("image monstre non valide !!!");	
 		crayon.setColor(Color.black);
 		for (int k=0; k<PacmanGame.monstres.size();k++) {
 			Monster monstre = PacmanGame.monstres.get(k);
@@ -178,9 +227,16 @@ public class PacmanPainter implements GamePainter {
 			}
 			crayon.fillOval(monstre.getX(),monstre.getY(),taille,taille);
 			crayon.setColor(Color.black);
-		}
+		}}*/
 		
-		
+		crayon.setColor(Color.black);
+		for (int k=0; k<PacmanGame.monstres.size();k++) {
+			Monster monstre = PacmanGame.monstres.get(k);
+			if (monstre.getDirection() == 0) {
+				crayon.setColor(Color.white);
+			}
+			crayon.fillOval(monstre.getX(),monstre.getY(),taille,taille);}
+			
 	
 		
 	}
