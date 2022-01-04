@@ -3,4 +3,6 @@ Review:
 Nous avons réalisé et validé toutes les fonctionnalités du backlog. 
 
 Retrospective:
-Pour ce sprint il y avait une seule contrainte pendant les vacances qui était le manque de communication. Heureusement nous avons pu gérer cela en se fixant de la deuxième semaine des heures de travail precises  , puisque nous avons pu avancer sur le jeu et réaliser tous les fonctionnalités mentionnées en Backlog afin que le jeu soit opérationnel et fonctionne bien.  
+Pour ce sprint il y avait une seule contrainte pendant les vacances qui était le manque de communication.
+Heureusement nous avons pu gérer cela en se fixant de la deuxième semaine des heures de travail precises, puisque nous avons pu avancer
+sur le jeu et réaliser tous les fonctionnalités mentionnées en Backlog afin que le jeu soit opérationnel et fonctionne bien.  
