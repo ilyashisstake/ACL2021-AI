@@ -1,5 +1,7 @@
+
 Backlog Sprint 3:
+
 _ Le heros dispose de trois vies lorsqu'il est touché par monstre il perd une vie . ok
-_ Le heros peut prendre une potion qui le rend invincible durant un temps limitée. ok
-_ Le heros peux tuer un mosntre après avoir récupérer des munitions. ok 
+_ Le heros peut prendre une potion qui le rend invincible durant un temps limité. ok
+_ Le heros peut tuer un monstre après avoir récupérer des munitions. ok 
 _ Lorsque le héros atteint la case sortie d'un niveau, il atteint le niveau supérieur.ok

@@ -238,9 +238,13 @@ public class PacmanPainter implements GamePainter {
 			Monster monstre = PacmanGame.monstres.get(k);
 			if (monstre.getDirection() == 0) {
 				crayon.setColor(Color.white);
+				crayon.fillOval(monstre.getX(),monstre.getY(),taille,taille);
+				crayon.setColor(Color.black);
 			}
-			crayon.fillOval(monstre.getX(),monstre.getY(),taille,taille);}
-			
+			else {
+				crayon.setColor(Color.black);
+				crayon.fillOval(monstre.getX(),monstre.getY(),taille,taille);}
+		}
 	
 		
 	}
