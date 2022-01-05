@@ -14,3 +14,11 @@ ou entrer les commandes suivantes :
 
 - "mvn package"
 - "java -cp target/Game-0.0.1-SNAPSHOT.jar start.Main"
+
+
+
+Liste des touches pour tirer:
+A: tirer en haut
+E: tirer à gauche
+R: tirer à droite
+T: tirer en bas
