@@ -486,4 +486,20 @@ public class Case {
 	        }
 		
 	}
+	public void removeLab(int x,int y) {
+		 for (int i = 0; i < this.labyrinthe.length; i++) {
+			 if (this.labyrinthe[i][0]==x && this.labyrinthe[i][1]==y) {
+	                int [][] newArr = new int[this.labyrinthe.length - 1][2];
+	                for(int index = 0; index < i; index++){
+	                    newArr[index] = this.labyrinthe[index];
+	                }
+	                for(int j = i; j < this.labyrinthe.length - 1; j++){
+	                    newArr[j] = this.labyrinthe[j+1];
+	                }
+	                this.labyrinthe=newArr.clone();
+	                break;
+	            }
+	        }
+		
+	}
 }
