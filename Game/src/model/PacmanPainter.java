@@ -154,35 +154,10 @@ public class PacmanPainter implements GamePainter {
 		// Affichage niveau
 		crayon.drawString("Niveau :", 20, HEIGHT-5);
 		crayon.drawString(Integer.toString(PacmanGame.getNiveau()),80,HEIGHT-5);
-		// Affichage nombre de munition
-		crayon.drawString("Munition :", 20, 15);
-		String a;
-		if (PacmanGame.heros.getMunition()==null) {
-			a="0";
-		}
-		else{a = Integer.toString(PacmanGame.heros.munitiondispo());}
-		crayon.drawString(a, 100, 15);
-		try {
-		for(int k=0;k<PacmanGame.heros.getMunition().size();k++) {
-			if (PacmanGame.heros.getMunition().get(k).getDirection()==1) {
-				BufferedImage image= ImageIO.read(new File("balle.png"));
-			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
-			if (PacmanGame.heros.getMunition().get(k).getDirection()==3) {
-				BufferedImage image= ImageIO.read(new File("balle2.png"));
-			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
-			if (PacmanGame.heros.getMunition().get(k).getDirection()==2) {
-				BufferedImage image= ImageIO.read(new File("balle3.png"));
-			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
-			if (PacmanGame.heros.getMunition().get(k).getDirection()==4) {
-				BufferedImage image= ImageIO.read(new File("balle4.png"));
-			crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
-		}
-		}catch (IOException e) {
-			System.out.println("image balle non valide !!!");}
 		
 		
 		
-		
+
 		//Affichage vie
 		crayon.setColor(Color.white);
 		crayon.setFont(new Font("SansSerif",Font.BOLD, 15));
@@ -207,6 +182,33 @@ public class PacmanPainter implements GamePainter {
 		crayon.setColor(Color.green);
 		for(int k=0;k<PacmanGame.cases.getBonus().length;k++) {
 			crayon.fillRect(PacmanGame.cases.getBonus()[k][0],PacmanGame.cases.getBonus()[k][1],taille,taille);}
+		
+		// Affichage nombre de munition
+				crayon.setColor(Color.white);
+				crayon.drawString("Munition :", 20, 15);
+				String a;
+				if (PacmanGame.heros.getMunition()==null) {
+					a="0";
+				}
+				else{a = Integer.toString(PacmanGame.heros.munitiondispo());}
+				crayon.drawString(a, 100, 15);
+				try {
+				for(int k=0;k<PacmanGame.heros.getMunition().size();k++) {
+					if (PacmanGame.heros.getMunition().get(k).getDirection()==1) {
+						BufferedImage image= ImageIO.read(new File("balle.png"));
+					crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+					if (PacmanGame.heros.getMunition().get(k).getDirection()==3) {
+						BufferedImage image= ImageIO.read(new File("balle2.png"));
+					crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+					if (PacmanGame.heros.getMunition().get(k).getDirection()==2) {
+						BufferedImage image= ImageIO.read(new File("balle3.png"));
+					crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+					if (PacmanGame.heros.getMunition().get(k).getDirection()==4) {
+						BufferedImage image= ImageIO.read(new File("balle4.png"));
+					crayon.drawImage(image,PacmanGame.heros.getMunition().get(k).getX(),PacmanGame.heros.getMunition().get(k).getY(),20,20,null);}
+				}
+				}catch (IOException e) {
+					System.out.println("image balle non valide !!!");}
 		
 		//Affichage heros
 		crayon.setColor(Color.blue);

@@ -524,6 +524,9 @@ public class PacmanGame implements Game {
 					heros.getMunition().get(k).setX(20+heros.getMunition().get(k).getX());
 				}
 				else {
+					if (heros.getMunition().get(k).getX()+20!=PacmanPainter.WIDTH-20) {
+						cases.removeLab(heros.getMunition().get(k).getX()+20, heros.getMunition().get(k).getY());
+					}
 					heros.getMunition().remove(k);
 				}
 				
@@ -535,6 +538,9 @@ public class PacmanGame implements Game {
 					heros.getMunition().get(k).setX(-20+heros.getMunition().get(k).getX());
 				}
 				else {
+					if (heros.getMunition().get(k).getX()-20!=0) {
+						cases.removeLab(heros.getMunition().get(k).getX()-20, heros.getMunition().get(k).getY());
+					}
 					heros.getMunition().remove(k);
 				}
 				
@@ -548,6 +554,9 @@ public class PacmanGame implements Game {
 						heros.getMunition().get(k).setY(-20+heros.getMunition().get(k).getY());
 					}
 					else {
+						if (heros.getMunition().get(k).getY()-20!=0) {
+							cases.removeLab(heros.getMunition().get(k).getX(), heros.getMunition().get(k).getY()-20);
+						}
 						heros.getMunition().remove(k);
 					}
 					
@@ -561,6 +570,9 @@ public class PacmanGame implements Game {
 						heros.getMunition().get(k).setY(20+heros.getMunition().get(k).getY());
 					}
 					else {
+						if (heros.getMunition().get(k).getY()+20!=PacmanPainter.HEIGHT-20) {
+							cases.removeLab(heros.getMunition().get(k).getX(), heros.getMunition().get(k).getY()+20);
+						}
 						heros.getMunition().remove(k);
 					}
 					
