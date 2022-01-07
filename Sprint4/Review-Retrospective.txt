@@ -1,0 +1,6 @@
+﻿Sprint4
+Review: 
+Nous avons réalisé et validé la fonctionnalité exigée par le professeur. 
+
+Retrospective:
+Le délai pour ce print étant assez petit nous avons réalisé une seule fonctionnalité. Elle a été réalisé très rapidement car elle a nécessité l'ajout de quelque ligne de code.
